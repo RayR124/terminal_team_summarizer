@@ -50,16 +50,15 @@ async function managerQuestions() {
             message: "What is your active role as Manager?"
         }
     ])
-    .then((mAnswers) => {
-        const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
-        team.push(manager);
-        addEmployee();
-    })
+        .then((mAnswers) => {
+            const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
+            team.push(manager);
+            addEmployee();
+        })
 };
 
 async function engineerQuestions() {
     const eAnswers = await inquirer.prompt([
-        //ask questions about engineer
         {
             type: "input",
             name: "Name",
@@ -84,7 +83,7 @@ async function engineerQuestions() {
         const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
         team.push(engineer);
         addEmployee();
-})
+    })
 };
 
 async function internQuestions() {
@@ -113,7 +112,7 @@ async function internQuestions() {
         const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
         team.push(intern);
         addEmployee();
-})
+    })
 };
 
 addEmployee();
