@@ -49,12 +49,11 @@ async function managerQuestions() {
             name: "Role",
             message: "What is your active role as Manager?"
         }
-    ])
-        .then((mAnswers) => {
-            const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
-            team.push(manager);
-            addEmployee();
-        })
+    ]).then((mAnswers) => {
+        const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
+        team.push(manager);
+        addEmployee();
+    })
 };
 
 async function engineerQuestions() {
