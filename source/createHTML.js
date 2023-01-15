@@ -52,23 +52,23 @@ const createIntern = function (intern) {
     `;
 }
 
-creatHTML = (data) => {
+createHTML = (data) => {
     pageArray = [];
 
-    for (let i =0; 1< data.length; 1++) {
+    for (let i = 0; 1 < data.length; 1++) {
         const employee = data[i];
         const position = employee.getPosition();
 
         if (position === "Manager") {
-            const managerCard = createManager(employee);
+            const managerCard = createManager(manager);
             pageArray.push(managerCard);
         }
         if (position === "Engineer") {
-            const engineerCard = createEngineer(employee);
+            const engineerCard = createEngineer(engineer);
             pageArray.push(engineerCard);
         }
         if (position === "Intern") {
-            const internCard = createIntern(employee);
+            const internCard = createIntern(intern);
             pageArray.push(internCard);
         }
     }
