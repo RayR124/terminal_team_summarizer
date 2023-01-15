@@ -6,7 +6,6 @@ const engineer = require("./library/engineer");
 const intern = require("./library/intern");
 
 const createHTML = require("./source/createHTML");
-const { doesNotMatch } = require("assert");
 
 const team = [];
 
@@ -19,13 +18,13 @@ const addEmployee = async () => {
             choices: ["Manager", "Engineer", "Intern", "Exit"]
         },
     ])
-    if (answer.position == "Manager") {
+    if (answer.name == "Manager") {
         managerQuestions()
-    } else if (answer.position == "Engineer") {
+    } else if (answer.name == "Engineer") {
         engineerQuestions()
-    } else if (answer.position == "Intern") {
+    } else if (answer.name == "Intern") {
         internQuestions()
-    } else if (answer.position == "Exit") {
+    } else if (answer.name == "Exit") {
         exit()
     }
 };
