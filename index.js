@@ -119,8 +119,8 @@ async function internQuestions() {
 
 function exit() {
     let doc = generateHTML(employees);
-    console.log('employees array', employees);
-    console.log( 'generated html', doc);
+    console.log("Employees: ", employees);
+    console.log( "Generated HTML", doc);
     fs.writeFileSync("./dist/index.html", doc);
 }
 
