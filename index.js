@@ -1,4 +1,4 @@
-const inquirer = reqiure("inquirer");
+const inquirer = require("inquirer");
 
 const employee = require("./library/employee");
 const manager = require("./library/manager");
