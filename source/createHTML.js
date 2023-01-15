@@ -1,3 +1,5 @@
+const employee = require("../library/employee");
+
 const createManager = function (manager) {
     return `
     <div class="col-4 mt-4 wholeCard">
@@ -55,7 +57,7 @@ const createIntern = function (intern) {
 createHTML = (data) => {
     pageArray = [];
 
-    for (let i = 0; 1 < data.length; 1++) {
+    for (let i = 0; 1 < data.length; i++) {
         const employee = data[i];
         const position = employee.getPosition();
 
