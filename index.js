@@ -1,6 +1,123 @@
 const inquirer = reqiure("inquirer");
+const fs = require("fs");
 
 const employee = require("./library/employee");
 const manager = require("./library/manager");
 const engineer = require("./library/engineer");
 const intern = require("./library/intern");
+
+const createHTML = require("./source/createHTML");
+
+/*I have no idea where the below line came from, appeared after an npm install*/
+//const { default: Choices } = require("inquirer/library/objects/choices");
+
+const team = [];
+
+const addEmployee = async () => {
+    const answer = await inquirer.prompt([
+        {
+            type: "list",
+            name: "Position",
+            message: "What is the position of this employee?",
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+    ])
+    if (answer.position == "Manager") {
+        managerQuestions()
+    } else if (answer.position == "Engineer") {
+        engineerQuestions()
+    } else if (answer.position == "Intern") {
+        internQuestions()
+    }
+};
+
+async function managerQuestions() {
+    const mAnswers = await inquirer.prompt([
+        {
+            type: "input",
+            name: "Name",
+            message: "What is your name?"
+        },
+        {
+            type: "input",
+            name: "ID",
+            message: "What is your Employee ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your email address?"
+        },
+        {
+            type: "input",
+            name: "Role",
+            message: "What is your active role as Manager?"
+        }
+    ])
+    .then((mAnswers) => {
+        const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
+        team.push(manager);
+        addEmployee();
+    })
+};
+
+async function engineerQuestions() {
+    const eAnswers = await inquirer.prompt([
+        //ask questions about engineer
+        {
+            type: "input",
+            name: "Name",
+            message: "What is your name?"
+        },
+        {
+            type: "input",
+            name: "ID",
+            message: "What is your employee ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your email?"
+        },
+        {
+            type: "input",
+            name: "GitHub",
+            message: "What is your GitHub username?"
+        }
+    ]).then((eAnswers) => {
+        const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
+        team.push(engineer);
+        addEmployee();
+})
+};
+
+async function internQuestions() {
+    const iAnswers = await inquirer.prompt([
+        {
+            type: "input",
+            name: "Name",
+            message: "What is your name?"
+        },
+        {
+            type: "input",
+            name: "ID",
+            message: "What is your employee ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your email?"
+        },
+        {
+            type: "input",
+            name: "Training",
+            message: "Where did you get your degree or certificate?"
+        }
+    ]).then((iAnswers) => {
+        const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
+        team.push(intern);
+        addEmployee();
+})
+};
+
+addEmployee();
