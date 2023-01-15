@@ -7,6 +7,9 @@ class intern extends employee {
     getTraining() {
         return this.training;
     }
+    getPosition() {
+        return "Intern";
+    }
 };
 
 module.exports = intern;

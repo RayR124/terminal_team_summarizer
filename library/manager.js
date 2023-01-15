@@ -7,6 +7,9 @@ class manager extends employee {
     getGitHub() {
         return this.role;
     }
+    getPosition() {
+        return "Manager";
+    }
 };
 
 module.exports = manager;
