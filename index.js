@@ -1,5 +1,4 @@
 const inquirer = reqiure("inquirer");
-const fs = require("fs");
 
 const employee = require("./library/employee");
 const manager = require("./library/manager");
@@ -7,9 +6,6 @@ const engineer = require("./library/engineer");
 const intern = require("./library/intern");
 
 const createHTML = require("./source/createHTML");
-
-/*I have no idea where the below line came from, appeared after an npm install*/
-//const { default: Choices } = require("inquirer/library/objects/choices");
 
 const team = [];
 
