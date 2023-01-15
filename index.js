@@ -6,6 +6,7 @@ const engineer = require("./library/engineer");
 const intern = require("./library/intern");
 
 const createHTML = require("./source/createHTML");
+const { doesNotMatch } = require("assert");
 
 const team = [];
 
@@ -15,7 +16,7 @@ const addEmployee = async () => {
             type: "list",
             name: "Position",
             message: "What is the position of this employee?",
-            choices: ["Manager", "Engineer", "Intern"]
+            choices: ["Manager", "Engineer", "Intern", "Exit"]
         },
     ])
     if (answer.position == "Manager") {
@@ -24,6 +25,8 @@ const addEmployee = async () => {
         engineerQuestions()
     } else if (answer.position == "Intern") {
         internQuestions()
+    } else if (answer.position == "Exit") {
+        exit()
     }
 };
 
@@ -113,5 +116,12 @@ async function internQuestions() {
         addEmployee();
     })
 };
+
+function exit() {
+    let doc = generateHTML(employees);
+    console.log('employees array', employees);
+    console.log( 'generated html', doc);
+    fs.writeFileSync("./dist/index.html", doc);
+}
 
 addEmployee();
