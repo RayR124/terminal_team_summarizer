@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 
 const employee = require("./library/employee");
 const manager = require("./library/manager");
