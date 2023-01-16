@@ -54,73 +54,112 @@ async function managerQuestions() {
     ]).then((mAnswers) => {
         const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
         team.push(manager);
-        addEmployee();
-    })
+    }).then(() => {
+        const res = inquirer.prompt([
+        {
+            type: "input",
+            name: "Continue",
+            message: "Do you want to add another employee?",
+            choices: ["Yes", "No"]
+        },
+      ]);
+    });
+    if (res.choices == "Yes") {
+        addEmployee()
+    } else {
+        exit()
+    };
 };
 
-async function engineerQuestions() {
-    const eAnswers = await inquirer.prompt([
-        {
-            type: "input",
-            name: "Name",
-            message: "What is your name?"
-        },
-        {
-            type: "input",
-            name: "ID",
-            message: "What is your employee ID?"
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "What is your email?"
-        },
-        {
-            type: "input",
-            name: "GitHub",
-            message: "What is your GitHub username?"
-        }
-    ]).then((eAnswers) => {
-        const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
-        team.push(engineer);
-        addEmployee();
-    })
-};
+    async function engineerQuestions() {
+        const eAnswers = await inquirer.prompt([
+            {
+                type: "input",
+                name: "Name",
+                message: "What is your name?"
+            },
+            {
+                type: "input",
+                name: "ID",
+                message: "What is your employee ID?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your email?"
+            },
+            {
+                type: "input",
+                name: "GitHub",
+                message: "What is your GitHub username?"
+            }
+        ]).then((eAnswers) => {
+            const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
+            team.push(engineer);
+        }).then(() => {
+            const res = inquirer.prompt([
+            {
+                type: "input",
+                name: "Continue",
+                message: "Do you want to add another employee?",
+                choices: ["Yes", "No"]
+            },
+          ]);
+        });
+        if (res.choices == "Yes") {
+            addEmployee()
+        } else {
+            exit()
+        };
+    };
 
-async function internQuestions() {
-    const iAnswers = await inquirer.prompt([
-        {
-            type: "input",
-            name: "Name",
-            message: "What is your name?"
-        },
-        {
-            type: "input",
-            name: "ID",
-            message: "What is your employee ID?"
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "What is your email?"
-        },
-        {
-            type: "input",
-            name: "Training",
-            message: "Where did you get your degree or certificate?"
-        }
-    ]).then((iAnswers) => {
-        const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
-        team.push(intern);
-        addEmployee();
-    })
-};
+    async function internQuestions() {
+        const iAnswers = await inquirer.prompt([
+            {
+                type: "input",
+                name: "Name",
+                message: "What is your name?"
+            },
+            {
+                type: "input",
+                name: "ID",
+                message: "What is your employee ID?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your email?"
+            },
+            {
+                type: "input",
+                name: "Training",
+                message: "Where did you get your degree or certificate?"
+            }
+        ]).then((iAnswers) => {
+            const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
+            team.push(intern);
+        }).then(() => {
+            const res = inquirer.prompt([
+            {
+                type: "input",
+                name: "Continue",
+                message: "Do you want to add another employee?",
+                choices: ["Yes", "No"]
+            },
+          ]);
+        });
+        if (res.choices == "Yes") {
+            addEmployee()
+        } else {
+            exit()
+        };
+    };
 
-function exit() {
-    let doc = generateHTML(employees);
-    console.log("Employees: ", employees);
-    console.log( "Generated HTML", doc);
-    fs.writeFileSync("./dist/index.html", doc);
-}
+    function exit() {
+        let doc = generateHTML(employees);
+        console.log("Employees: ", employees);
+        console.log("Generated HTML", doc);
+        fs.writeFileSync("./dist/index.html", doc);
+    }
 
-addEmployee();
+    addEmployee();
