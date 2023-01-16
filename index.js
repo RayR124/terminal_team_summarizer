@@ -11,7 +11,7 @@ const createHTML = require("./source/createHTML");
 const team = [];
 
 function exit() {
-    let doc = generateHTML(team);
+    let doc = createHTML(team);
     console.log("Employees: ", team);
     console.log("Generated HTML", doc);
     fs.writeFileSync("./dist/index.html", doc);
@@ -26,13 +26,13 @@ async function addEmployee() {
             choices: ["Manager", "Engineer", "Intern", "Exit"]
         },
     ])
-    if (answer.name == "Manager") {
+    if (answer.choices == "Manager") {
         await managerQuestions()
-    } else if (answer.name == "Engineer") {
+    } else if (answer.choices == "Engineer") {
         await engineerQuestions()
-    } else if (answer.name == "Intern") {
+    } else if (answer.choices == "Intern") {
         await internQuestions()
-    } else if (answer.name == "Exit") {
+    } else if (answer.choices == "Exit") {
         exit()
     }
 };
