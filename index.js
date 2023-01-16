@@ -9,7 +9,14 @@ const createHTML = require("./source/createHTML");
 
 const team = [];
 
-const addEmployee = async () => {
+function exit() {
+    let doc = generateHTML(employees);
+    console.log("Employees: ", employees);
+    console.log("Generated HTML", doc);
+    fs.writeFileSync("./dist/index.html", doc);
+}
+
+async function addEmployee() {
     const answer = await inquirer.prompt([
         {
             type: "list",
@@ -19,11 +26,11 @@ const addEmployee = async () => {
         },
     ])
     if (answer.name == "Manager") {
-        managerQuestions()
+        await managerQuestions()
     } else if (answer.name == "Engineer") {
-        engineerQuestions()
+        await engineerQuestions()
     } else if (answer.name == "Intern") {
-        internQuestions()
+        await internQuestions()
     } else if (answer.name == "Exit") {
         exit()
     }
@@ -56,110 +63,108 @@ async function managerQuestions() {
         team.push(manager);
     }).then(() => {
         const res = inquirer.prompt([
-        {
-            type: "input",
-            name: "Continue",
-            message: "Do you want to add another employee?",
-            choices: ["Yes", "No"]
-        },
-      ]);
+            {
+                type: "list",
+                name: "Continue",
+                message: "Do you want to add another employee?",
+                choices: ["Yes", "No"]
+            },
+        ]); return res;
+    }).then((secondPromptResult) => {
+        if (secondPromptResult.choices == "Yes") {
+            addEmployee()
+        } else {
+            exit()
+        };
     });
-    if (res.choices == "Yes") {
-        addEmployee()
-    } else {
-        exit()
-    };
 };
 
-    async function engineerQuestions() {
-        const eAnswers = await inquirer.prompt([
+async function engineerQuestions() {
+    const eAnswers = await inquirer.prompt([
+        {
+            type: "input",
+            name: "Name",
+            message: "What is your name?"
+        },
+        {
+            type: "input",
+            name: "ID",
+            message: "What is your employee ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your email?"
+        },
+        {
+            type: "input",
+            name: "GitHub",
+            message: "What is your GitHub username?"
+        }
+    ]).then((eAnswers) => {
+        const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
+        team.push(engineer);
+    }).then(() => {
+        const res = inquirer.prompt([
             {
-                type: "input",
-                name: "Name",
-                message: "What is your name?"
-            },
-            {
-                type: "input",
-                name: "ID",
-                message: "What is your employee ID?"
-            },
-            {
-                type: "input",
-                name: "email",
-                message: "What is your email?"
-            },
-            {
-                type: "input",
-                name: "GitHub",
-                message: "What is your GitHub username?"
-            }
-        ]).then((eAnswers) => {
-            const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
-            team.push(engineer);
-        }).then(() => {
-            const res = inquirer.prompt([
-            {
-                type: "input",
+                type: "list",
                 name: "Continue",
                 message: "Do you want to add another employee?",
                 choices: ["Yes", "No"]
             },
-          ]);
-        });
-        if (res.choices == "Yes") {
+        ]); return res;
+    }).then((secondPromptResult) => {
+        if (secondPromptResult.choices == "Yes") {
             addEmployee()
         } else {
             exit()
         };
-    };
+    });
+};
 
-    async function internQuestions() {
-        const iAnswers = await inquirer.prompt([
+async function internQuestions() {
+    const iAnswers = await inquirer.prompt([
+        {
+            type: "input",
+            name: "Name",
+            message: "What is your name?"
+        },
+        {
+            type: "input",
+            name: "ID",
+            message: "What is your employee ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your email?"
+        },
+        {
+            type: "input",
+            name: "Training",
+            message: "Where did you get your degree or certificate?"
+        }
+    ]).then((iAnswers) => {
+        const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
+        team.push(intern);
+    }).then(() => {
+        const res = inquirer.prompt([
             {
-                type: "input",
-                name: "Name",
-                message: "What is your name?"
-            },
-            {
-                type: "input",
-                name: "ID",
-                message: "What is your employee ID?"
-            },
-            {
-                type: "input",
-                name: "email",
-                message: "What is your email?"
-            },
-            {
-                type: "input",
-                name: "Training",
-                message: "Where did you get your degree or certificate?"
-            }
-        ]).then((iAnswers) => {
-            const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
-            team.push(intern);
-        }).then(() => {
-            const res = inquirer.prompt([
-            {
-                type: "input",
+                type: "list",
                 name: "Continue",
                 message: "Do you want to add another employee?",
                 choices: ["Yes", "No"]
             },
-          ]);
-        });
-        if (res.choices == "Yes") {
+        ]); return res;
+    }).then((secondPromptResult) => {
+        if (secondPromptResult.choices == "Yes") {
             addEmployee()
         } else {
             exit()
         };
-    };
+    });
+};
 
-    function exit() {
-        let doc = generateHTML(employees);
-        console.log("Employees: ", employees);
-        console.log("Generated HTML", doc);
-        fs.writeFileSync("./dist/index.html", doc);
-    }
 
-    addEmployee();
+
+addEmployee();
