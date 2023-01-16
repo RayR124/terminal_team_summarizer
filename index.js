@@ -11,8 +11,8 @@ const createHTML = require("./source/createHTML");
 const team = [];
 
 function exit() {
-    let doc = generateHTML(employees);
-    console.log("Employees: ", employees);
+    let doc = generateHTML(team);
+    console.log("Employees: ", team);
     console.log("Generated HTML", doc);
     fs.writeFileSync("./dist/index.html", doc);
 }
