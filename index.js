@@ -12,8 +12,8 @@ const team = [];
 
 function exit() {
     let doc = createHTML(team);
-    console.log("Employees: ", team);
-    console.log("Generated HTML", doc);
+    //console.log("Employees: ", team);
+    //console.log("Generated HTML", doc);
     fs.writeFileSync("./dist/index.html", doc);
 }
 
