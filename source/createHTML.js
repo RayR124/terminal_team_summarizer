@@ -2,55 +2,49 @@ const employee = require("../library/employee");
 
 const createManager = function (manager) {
     return `
-    <div class="col-4 mt-4 wholeCard">
-        <div class="card h-100">
-            <div class="card-header">
-                <h2>${manager.name}</h2>
-                <h3>Manager</h4>
+        <div class="card">
+        <h2>Manager:</h2>
+            <div class="title">
+                <h1>${manager.name}</h1>
             </div>
-            <div> class="card-body">
+            <div>
                 <ul class="id">ID: ${manager.ID}</ul>
                 <ul class="email">Email: <a href="mailto:${manager.email}">${manager.email}</a></ul>
                 <ul class="role">Role: ${manager.role}</ul>
             </div>
         </div>
-    </div>
     `;
 }
 
 const createEngineer = function (engineer) {
     return `
-    <div class="col-4 mt-4 wholeCard">
-        <div class="card h-100">
-            <div class="card-header">
-                <h2>${engineer.name}</h2>
-                <h3>Engineer</h4>
+        <div class="card">
+        <h2>Engineer:</h2>
+            <div class="title">
+                <h1>${engineer.name}</h1>
             </div>
-            <div> class="card-body">
+            <div>
                 <ul class="id">ID: ${engineer.ID}</ul>
                 <ul class="email">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></ul>
                 <ul class="role">GitHub: ${engineer.gitHub}</ul>
             </div>
         </div>
-    </div>
     `;
 }
 
 const createIntern = function (intern) {
     return `
-    <div class="col-4 mt-4 wholeCard">
-        <div class="card h-100">
-            <div class="card-header">
-                <h2>${intern.name}</h2>
-                <h3>Intern</h4>
+        <div class="card">
+        <h2>Intern:</h2>
+            <div class="title">
+                <h1>${intern.name}</h1>
             </div>
-            <div> class="card-body">
+            <div>
                 <ul class="id">ID: ${intern.ID}</ul>
                 <ul class="email">Email: <a href="mailto:${intern.email}">${intern.email}</a></ul>
                 <ul class="role">Training: ${intern.training}</ul>
             </div>
         </div>
-    </div>
     `;
 }
 
@@ -94,9 +88,10 @@ const createPage = function (employeeCards) {
 </head>
 
 <body>
-
     <h1 style="text-align: center">My Team Summary</h1>
+    <div class="container">
     ${employeeCards}
+    </div>
 </body>
 </html>
     `;
