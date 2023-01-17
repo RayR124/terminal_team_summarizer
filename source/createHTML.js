@@ -24,7 +24,7 @@ const createEngineer = function (engineer) {
         <div class="card h-100">
             <div class="card-header">
                 <h2>${engineer.name}</h2>
-                <h3>Manager</h4>
+                <h3>Engineer</h4>
             </div>
             <div> class="card-body">
                 <ul class="id">ID: ${engineer.ID}</ul>
@@ -42,7 +42,7 @@ const createIntern = function (intern) {
         <div class="card h-100">
             <div class="card-header">
                 <h2>${intern.name}</h2>
-                <h3>Manager</h4>
+                <h3>Intern</h4>
             </div>
             <div> class="card-body">
                 <ul class="id">ID: ${intern.ID}</ul>
@@ -56,11 +56,9 @@ const createIntern = function (intern) {
 
 createHTML = (data) => {
     pageArray = [];
-
-    for (let i = 0; 1 < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         const employee = data[i];
         const position = employee.getPosition();
-        console.log(employee);
 
         if (position === "Manager") {
             const managerCard = createManager(employee);
@@ -98,28 +96,7 @@ const createPage = function (employeeCards) {
 <body>
 
     <h1 style="text-align: center">My Team Summary</h1>
-
-    <div class="container">
-        <div class="card">
-            <div class="cardWhole">
-            ${managerCard}
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="cardWhole">
-            ${engineerCard}
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="cardWhole">
-            ${internCard}
-            </div>
-        </div>
-    </div>
+    ${employeeCards}
 </body>
 </html>
     `;

@@ -1,4 +1,4 @@
-const employee = require("../library/employee");
+const Employee = require("../library/employee");
 const fs = require("fs");
 
 jest.mock("fs");

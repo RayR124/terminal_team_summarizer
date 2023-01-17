@@ -1,4 +1,4 @@
-const manager = require("../library/manager");
+const Manager = require("../library/manager");
 const fs = require("fs");
 
 test("Creates an object under Manager class", () => {
