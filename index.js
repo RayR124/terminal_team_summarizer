@@ -18,29 +18,28 @@ function exit() {
 }
 
 async function addEmployee() {
-    const answer = await inquirer.prompt([
+    await inquirer.prompt([
         {
             type: "list",
             name: "Position",
             message: "What is the position of this employee?",
             choices: ["Manager", "Engineer", "Intern", "Exit"]
         },
-    ]).then((answer) => {
-        console.log(answer);
-    if (answer == "Manager") {
-        managerQuestions()
-    } else if (answer == "Engineer") {
-        engineerQuestions()
-    } else if (answer == "Intern") {
-        internQuestions()
-    } else if (answer == "Exit") {
-        exit()
-    }
-});
+    ]).then(async (answer) => {
+        if (answer.Position == "Manager") {
+            managerQuestions()
+        } else if (answer.Position == "Engineer") {
+            engineerQuestions()
+        } else if (answer.Position == "Intern") {
+            internQuestions()
+        } else if (answer.Position == "Exit") {
+            exit()
+        }
+    });
 }
 
 async function managerQuestions() {
-    const mAnswers = await inquirer.prompt([
+    await inquirer.prompt([
         {
             type: "input",
             name: "Name",
@@ -53,7 +52,7 @@ async function managerQuestions() {
         },
         {
             type: "input",
-            name: "email",
+            name: "Email",
             message: "What is their email address?"
         },
         {
@@ -62,7 +61,7 @@ async function managerQuestions() {
             message: "What is their active role as Manager?"
         }
     ]).then((mAnswers) => {
-        const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
+        const manager = new Manager(mAnswers.Name, mAnswers.ID, mAnswers.Email, mAnswers.Role);
         team.push(manager);
     }).then(() => {
         const res = inquirer.prompt([
@@ -74,7 +73,7 @@ async function managerQuestions() {
             },
         ]); return res;
     }).then((secondPromptResult) => {
-        if (secondPromptResult.choices == "Yes") {
+        if (secondPromptResult.Continue == "Yes") {
             addEmployee()
         } else {
             exit()
@@ -83,7 +82,7 @@ async function managerQuestions() {
 };
 
 async function engineerQuestions() {
-    const eAnswers = await inquirer.prompt([
+    await inquirer.prompt([
         {
             type: "input",
             name: "Name",
@@ -96,7 +95,7 @@ async function engineerQuestions() {
         },
         {
             type: "input",
-            name: "email",
+            name: "Email",
             message: "What is their email?"
         },
         {
@@ -105,7 +104,7 @@ async function engineerQuestions() {
             message: "What is their GitHub username?"
         }
     ]).then((eAnswers) => {
-        const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
+        const engineer = new Engineer(eAnswers.Name, eAnswers.ID, eAnswers.Email, eAnswers.GitHub);
         team.push(engineer);
     }).then(() => {
         const res = inquirer.prompt([
@@ -117,7 +116,7 @@ async function engineerQuestions() {
             },
         ]); return res;
     }).then((secondPromptResult) => {
-        if (secondPromptResult.choices == "Yes") {
+        if (secondPromptResult.Continue == "Yes") {
             addEmployee()
         } else {
             exit()
@@ -126,7 +125,7 @@ async function engineerQuestions() {
 };
 
 async function internQuestions() {
-    const iAnswers = await inquirer.prompt([
+    await inquirer.prompt([
         {
             type: "input",
             name: "Name",
@@ -139,7 +138,7 @@ async function internQuestions() {
         },
         {
             type: "input",
-            name: "email",
+            name: "Email",
             message: "What is their email?"
         },
         {
@@ -148,7 +147,7 @@ async function internQuestions() {
             message: "Where did they get their degree or certificate?"
         }
     ]).then((iAnswers) => {
-        const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
+        const intern = new Intern(iAnswers.Name, iAnswers.ID, iAnswers.Email, iAnswers.Training);
         team.push(intern);
     }).then(() => {
         const res = inquirer.prompt([
@@ -160,7 +159,7 @@ async function internQuestions() {
             },
         ]); return res;
     }).then((secondPromptResult) => {
-        if (secondPromptResult.choices == "Yes") {
+        if (secondPromptResult.Continue == "Yes") {
             addEmployee()
         } else {
             exit()

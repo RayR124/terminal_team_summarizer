@@ -60,17 +60,18 @@ createHTML = (data) => {
     for (let i = 0; 1 < data.length; i++) {
         const employee = data[i];
         const position = employee.getPosition();
+        console.log(employee);
 
         if (position === "Manager") {
-            const managerCard = createManager(manager);
+            const managerCard = createManager(employee);
             pageArray.push(managerCard);
         }
         if (position === "Engineer") {
-            const engineerCard = createEngineer(engineer);
+            const engineerCard = createEngineer(employee);
             pageArray.push(engineerCard);
         }
         if (position === "Intern") {
-            const internCard = createIntern(intern);
+            const internCard = createIntern(employee);
             pageArray.push(internCard);
         }
     }
