@@ -7,7 +7,7 @@ This is an app built in back-end using ZERO starter code (but helpful hints from
 ## Table of Contents
 
 - [Installation](#installation)
-- [Screenshot] (#screenshot)
+- [Screenshot](#screenshot)
 - [Usage](#usage)
 - [License](#license)
 - [Questions](#questions)
