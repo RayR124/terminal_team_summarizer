@@ -1,10 +1,10 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const employee = require("./library/employee");
-const manager = require("./library/manager");
-const engineer = require("./library/engineer");
-const intern = require("./library/intern");
+const Employee = require("./library/employee");
+const Manager = require("./library/manager");
+const Engineer = require("./library/engineer");
+const Intern = require("./library/intern");
 
 const createHTML = require("./source/createHTML");
 
@@ -25,39 +25,41 @@ async function addEmployee() {
             message: "What is the position of this employee?",
             choices: ["Manager", "Engineer", "Intern", "Exit"]
         },
-    ])
-    if (answer.choices == "Manager") {
-        await managerQuestions()
-    } else if (answer.choices == "Engineer") {
-        await engineerQuestions()
-    } else if (answer.choices == "Intern") {
-        await internQuestions()
-    } else if (answer.choices == "Exit") {
+    ]).then((answer) => {
+        console.log(answer);
+    if (answer == "Manager") {
+        managerQuestions()
+    } else if (answer == "Engineer") {
+        engineerQuestions()
+    } else if (answer == "Intern") {
+        internQuestions()
+    } else if (answer == "Exit") {
         exit()
     }
-};
+});
+}
 
 async function managerQuestions() {
     const mAnswers = await inquirer.prompt([
         {
             type: "input",
             name: "Name",
-            message: "What is your name?"
+            message: "What is their name?"
         },
         {
             type: "input",
             name: "ID",
-            message: "What is your Employee ID?"
+            message: "What is thier Employee ID?"
         },
         {
             type: "input",
             name: "email",
-            message: "What is your email address?"
+            message: "What is their email address?"
         },
         {
             type: "input",
             name: "Role",
-            message: "What is your active role as Manager?"
+            message: "What is their active role as Manager?"
         }
     ]).then((mAnswers) => {
         const manager = new Manager(mAnswers.name, mAnswers.id, mAnswers.email, mAnswers.role);
@@ -85,22 +87,22 @@ async function engineerQuestions() {
         {
             type: "input",
             name: "Name",
-            message: "What is your name?"
+            message: "What is their name?"
         },
         {
             type: "input",
             name: "ID",
-            message: "What is your employee ID?"
+            message: "What is their employee ID?"
         },
         {
             type: "input",
             name: "email",
-            message: "What is your email?"
+            message: "What is their email?"
         },
         {
             type: "input",
             name: "GitHub",
-            message: "What is your GitHub username?"
+            message: "What is their GitHub username?"
         }
     ]).then((eAnswers) => {
         const engineer = new Engineer(eAnswers.name, eAnswers.id, eAnswers.email, eAnswers.gitHub);
@@ -128,22 +130,22 @@ async function internQuestions() {
         {
             type: "input",
             name: "Name",
-            message: "What is your name?"
+            message: "What is their name?"
         },
         {
             type: "input",
             name: "ID",
-            message: "What is your employee ID?"
+            message: "What is their employee ID?"
         },
         {
             type: "input",
             name: "email",
-            message: "What is your email?"
+            message: "What is their email?"
         },
         {
             type: "input",
             name: "Training",
-            message: "Where did you get your degree or certificate?"
+            message: "Where did they get their degree or certificate?"
         }
     ]).then((iAnswers) => {
         const intern = new Intern(iAnswers.name, iAnswers.id, iAnswers.email, iAnswers.training);
@@ -165,7 +167,5 @@ async function internQuestions() {
         };
     });
 };
-
-
 
 addEmployee();
